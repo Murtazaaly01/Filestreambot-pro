@@ -13,41 +13,45 @@ START_TEXT = """ Your Telegram DC Is : `{}`  """
 @StreamBot.on_message(filters.regex("maintainers😎"))
 async def maintainers(b,m):
     try:
-       await b.send_message(chat_id=m.chat.id,text="HELLO",quote=True)
+        await b.send_message(chat_id=m.chat.id,text="HELLO",quote=True)
     except Exception:
-                await b.send_message(
-                    chat_id=m.chat.id,
-                    text="I am Coded By [Adarsh Goel](https://github.com/adarsh-goel)",
-                    
-                    reply_markup=InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton("Developer💻", url=f"https://t.me/agprojects")
-                            ]
-                        ]
-                    ),
-                    parse_mode="markdown",
-                    disable_web_page_preview=True)
+        await b.send_message(
+            chat_id=m.chat.id,
+            text="I am Coded By [Adarsh Goel](https://github.com/adarsh-goel)",
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            "Developer💻", url="https://t.me/agprojects"
+                        )
+                    ]
+                ]
+            ),
+            parse_mode="markdown",
+            disable_web_page_preview=True,
+        )
             
          
 @StreamBot.on_message(filters.regex("follow❤️"))
 async def follow_user(b,m):
     try:
-       await b.send_message(chat_id=m.chat.id,text="HELLO",quote=True)
+        await b.send_message(chat_id=m.chat.id,text="HELLO",quote=True)
     except Exception:
-                await b.send_message(
-                    chat_id=m.chat.id,
-                    text="<B>HERE'S THE FOLLOW LINK</B>",
-                    
-                    reply_markup=InlineKeyboardMarkup(
-                        [
-                            [
-                                InlineKeyboardButton("FOLLOW ME", url=f"https://GITHUB.COM/adarsh-goel")
-                            ]
-                        ]
-                    ),
-                    parse_mode="HTML",
-                    disable_web_page_preview=True)
+        await b.send_message(
+            chat_id=m.chat.id,
+            text="<B>HERE'S THE FOLLOW LINK</B>",
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            "FOLLOW ME", url="https://GITHUB.COM/adarsh-goel"
+                        )
+                    ]
+                ]
+            ),
+            parse_mode="HTML",
+            disable_web_page_preview=True,
+        )
         
 
 @StreamBot.on_message(filters.regex("DC"))

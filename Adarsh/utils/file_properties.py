@@ -7,13 +7,11 @@ from Adarsh.server.exceptions import FIleNotFound
 
 
 async def parse_file_id(message: "Message") -> Optional[FileId]:
-    media = get_media_from_message(message)
-    if media:
+    if media := get_media_from_message(message):
         return FileId.decode(media.file_id)
 
 async def parse_file_unique_id(message: "Messages") -> Optional[str]:
-    media = get_media_from_message(message)
-    if media:
+    if media := get_media_from_message(message):
         return media.file_unique_id
 
 async def get_file_ids(client: Client, chat_id: int, message_id: int) -> Optional[FileId]:
@@ -41,8 +39,7 @@ def get_media_from_message(message: "Message") -> Any:
         "video_note",
     )
     for attr in media_types:
-        media = getattr(message, attr, None)
-        if media:
+        if media := getattr(message, attr, None):
             return media
 
 
@@ -53,7 +50,7 @@ def get_hash(media_msg: Message) -> str:
 def get_name(media_msg: Message) -> str:
     media = get_media_from_message(media_msg)
     file_name=getattr(media, "file_name", "")
-    return file_name if file_name else ""
+    return file_name or ""
 
 def get_media_file_size(m):
     media = get_media_from_message(m)

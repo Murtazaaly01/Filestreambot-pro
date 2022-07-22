@@ -26,13 +26,12 @@ async def login_handler(c: Client, m: Message):
         try:
             ag = await m.reply_text("Now send me password.\n\n If You don't know check the MY_PASS Variable in heroku \n\n(You can use /cancel command to cancel the process)")
             _text = await c.listen(m.chat.id, filters=filters.text, timeout=90)
-            if _text.text:
-                textp = _text.text
-                if textp=="/cancel":
-                   await ag.edit("Process Cancelled Successfully")
-                   return
-            else:
+            if not _text.text:
                 return
+            textp = _text.text
+            if textp=="/cancel":
+               await ag.edit("Process Cancelled Successfully")
+               return
         except TimeoutError:
             await ag.edit("I can't wait more for password, try again")
             return
@@ -49,7 +48,7 @@ async def login_handler(c: Client, m: Message):
 async def private_receive_handler(c: Client, m: Message):
     if MY_PASS:
         check_pass = await pass_db.get_user_pass(m.chat.id)
-        if check_pass== None:
+        if check_pass is None:
             await m.reply_text("Login first using /login cmd \n don\'t know the pass? request it from @agprojects")
             return
         if check_pass != MY_PASS:
@@ -98,11 +97,11 @@ async def private_receive_handler(c: Client, m: Message):
 
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         stream_link = f"{Var.URL}watch/{str(log_msg.message_id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
-        
+
         online_link = f"{Var.URL}{str(log_msg.message_id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
-       
-        
-        
+
+
+
 
         msg_text ="""
 <i><u>𝗬𝗼𝘂𝗿 𝗟𝗶𝗻𝗸 𝗚𝗲𝗻𝗲𝗿𝗮𝘁𝗲𝗱 !</u></i>
@@ -136,7 +135,7 @@ async def private_receive_handler(c: Client, m: Message):
 async def channel_receive_handler(bot, broadcast):
     if MY_PASS:
         check_pass = await pass_db.get_user_pass(broadcast.chat.id)
-        if check_pass == None:
+        if check_pass is None:
             await broadcast.reply_text("Login first using /login cmd \n don\'t know the pass? request it from @agprojects")
             return
         if check_pass != MY_PASS:
